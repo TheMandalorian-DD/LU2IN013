@@ -110,27 +110,62 @@ public class MyEcosystem_predprey extends CAtoolbox {
 
 							agents_remove.add(j);
 
-							((PredatorAgent)i)._predator = false //il n'a plus faim
+							((PredatorAgent)i)._predator = false; //il n'a plus faim
 
 						}
 
 					// Les predateurs poursuit les proies
 
-						int r = 5;
+						// int r = 5;
 					
-						for ( int x2 = i._x-r ; x2 <= i._x+r ; x2++ ){
+						// for ( int x2 = i._x-r ; x2 <= i._x+r ; x2++ ){
 
-							for ( int y2 = i._y-r ; y2 <= i._y+r ; y2++ ){
+						// 	for ( int y2 = i._y-r ; y2 <= i._y+r ; y2++ ){
 
-								if (x2 < 0 || x2 >= dx || y2 < 0 || y2 >= dy) continue;
+						// 		if (x2 < 0 || x2 >= dx || y2 < 0 || y2 >= dy) continue;
 
-								if (j._x==x2 && j._y==y2){
+						// 		if (j._x==x2 && j._y==y2){
 
-									i._orient=j._orient;
+						// 			i._orient=j._orient;
+						// 		}
+						// 	}
+						// }
+					}
+				}
+			}
+
+			// Les predateurs poursuit les proies
+
+			for(Agent i : world.agents){
+
+				if (i instanceof PredatorAgent){
+
+					int dist = Integer.MAX_VALUE;
+
+					Agent close_prey = null;
+
+					for(Agent j : world.agents){
+
+
+						if (j instanceof PreyAgent){
+
+							int r = 5;
+					
+							for ( int x2 = i._x-r ; x2 <= i._x+r ; x2++ ){
+
+								for ( int y2 = i._y-r ; y2 <= i._y+r ; y2++ ){
+
+									if ((j._x==x2 && j._y==y2) && (dist > i.distance(j._x,j._y))){
+
+										dist = i.distance(j._x,j._y);
+
+										close_prey = j;
+									}
 								}
 							}
 						}
 					}
+					i._orient = j._orient;
 				}
 			}
 
@@ -159,19 +194,6 @@ public class MyEcosystem_predprey extends CAtoolbox {
 			
 					
 			world.agents.removeAll(agents_remove);
-
-			
-
-			
-
-			// Les predateur meurent s'ils n'ont pas mangé à L itérations
-					
-
-
-			// if (((PredatorAgent)i)._predator && l==20){
-						// 	agents_remove.add(i);
-						// 	continue;
-						// }
 
 			world.step();
 
