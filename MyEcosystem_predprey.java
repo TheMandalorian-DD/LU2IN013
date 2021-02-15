@@ -165,7 +165,9 @@ public class MyEcosystem_predprey extends CAtoolbox {
 							}
 						}
 					}
-					i._orient = close_prey._orient;
+					if (close_prey != null){
+						i._orient = close_prey._orient;
+					}
 				}
 			}
 
