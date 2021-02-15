@@ -144,13 +144,13 @@ public class MyEcosystem_predprey extends CAtoolbox {
 
 					if (i instanceof PredatorAgent){
 
-						if (((PredatorAgenti)i)._predator){ //si l'animal n'a toujours pas mangé
+						if (((PredatorAgent)i)._predator){ //si l'animal n'a toujours pas mangé
 
 							agents_remove.add(i);
 
 						} else {
 
-							((PredatorAgenti)i)._predator = true; //il commence à avoir faim
+							((PredatorAgent)i)._predator = true; //il commence à avoir faim
 
 						}
 					}
