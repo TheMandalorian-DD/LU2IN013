@@ -113,28 +113,67 @@ public class MyEcosystem_predprey extends CAtoolbox {
 							((PredatorAgent)i)._predator = false; //il n'a plus faim
 
 						}
-
-					// Les predateurs poursuit les proies
-
-						// int r = 5;
-					
-						// for ( int x2 = i._x-r ; x2 <= i._x+r ; x2++ ){
-
-						// 	for ( int y2 = i._y-r ; y2 <= i._y+r ; y2++ ){
-
-						// 		if (x2 < 0 || x2 >= dx || y2 < 0 || y2 >= dy) continue;
-
-						// 		if (j._x==x2 && j._y==y2){
-
-						// 			i._orient=j._orient;
-						// 		}
-						// 	}
-						// }
 					}
 				}
 			}
 
-			// Les predateurs poursuit les proies
+			// Les proies fuient les predateurs
+
+			for(Agent i : world.agents){
+
+				 if (i instanceof PreyAgent){
+
+				 	int dist = Integer.MAX_VALUE;
+
+				 	Agent close_pred = null;
+
+				 	int r = 4;
+
+				 	for ( int x2 = i._x-r ; x2 <= i._x+r ; x2++ ){
+
+						for ( int y2 = i._y-r ; y2 <= i._y+r ; y2++ ){
+
+							for(Agent j : world.agents){
+
+								if (j instanceof PredatorAgent){
+
+									if ((j._x==x2 && j._y==y2) && (dist > i.distance(j._x,j._y))){
+
+										dist = i.distance(j._x,j._y);
+
+										close_pred = j;
+
+									}
+								}
+							}
+						}
+					}
+					if (close_pred != null){
+
+						if (close_pred._orient == 0){
+
+							i._orient = 2;
+						}
+						if (close_pred._orient == 1){
+
+							i._orient = 3;
+						}
+						if (close_pred._orient == 2){
+
+							i._orient = 0;
+						}
+						if (close_pred._orient == 3){
+
+							i._orient = 1;
+						}
+					}
+				}
+			}
+
+
+				
+
+			// Les predateur chassent les proies les plus proches
 
 			for(Agent i : world.agents){
 
@@ -144,16 +183,15 @@ public class MyEcosystem_predprey extends CAtoolbox {
 
 					Agent close_prey = null;
 
-					for(Agent j : world.agents){
+					int r = 5;
 
+					for ( int x2 = i._x-r ; x2 <= i._x+r ; x2++ ){
 
-						if (j instanceof PreyAgent){
+						for ( int y2 = i._y-r ; y2 <= i._y+r ; y2++ ){
 
-							int r = 5;
-					
-							for ( int x2 = i._x-r ; x2 <= i._x+r ; x2++ ){
+							for(Agent j : world.agents){
 
-								for ( int y2 = i._y-r ; y2 <= i._y+r ; y2++ ){
+								if (j instanceof PreyAgent){
 
 									if ((j._x==x2 && j._y==y2) && (dist > i.distance(j._x,j._y))){
 
