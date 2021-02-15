@@ -215,9 +215,9 @@ public class World {
 
 				if (monde[a._x][a._y]){
 
-					a._alive = false; // il n'a plus faim 
+					((PreyAgent)a)._alive = false; // il n'a plus faim 
 
-	    			monde[a._x][a._y] = false // l'herbe a été mangé
+	    			monde[a._x][a._y] = false; // l'herbe a été mangé
 	    		}
 	    	}
 	    }
