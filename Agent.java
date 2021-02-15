@@ -28,6 +28,10 @@ public abstract class Agent {
 		
 		_orient = 0;
 	}
+
+	public int distance(int x, int y){ //Retourne la distance entre une ressource et un agent
+		return Math.abs(_x-x)+Math.abs(_y-y);
+	}
 	
 	abstract public void step( );
 
