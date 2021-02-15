@@ -16,7 +16,7 @@ public class World {
 	
 	ArrayList<Agent> agents;
 
-	boolean[][] monde = new boolean[_dx][_dy];
+	boolean[][] grass = new boolean[_dx][_dy];
 
 	double p_grass = 0.001;
 	
@@ -202,33 +202,20 @@ public class World {
 
 	    	for ( int y = 0 ; y != _dy ; y++ )
 
-	    		monde[(int)x][(int)y]=(1/2 >= Math.random()); // grass
+	    		grass[(int)x][(int)y]=(1/2 >= Math.random()); // grass
 	    		
 	}
 	
 	public void stepWorld() // world THEN agents
 	{
 
-		for(Agent a : agents){
-
-			if (a instanceof PreyAgent){
-
-				if (monde[a._x][a._y]){
-
-					((PreyAgent)a)._alive = false; // il n'a plus faim 
-
-	    			monde[a._x][a._y] = false; // l'herbe a été mangé
-	    		}
-	    	}
-	    }
-
 		for ( int x = 0 ; x != _dx ; x++ )
 
 	    	for ( int y = 0 ; y != _dy ; y++ )
 
-	    		if ( !(monde[(int)x][(int)y]) ){
+	    		if ( !(grass[(int)x][(int)y]) ){
 
-	    			monde[(int)x][(int)y]=(p_grass >= Math.random()); // grass
+	    			grass[(int)x][(int)y]=(p_grass >= Math.random()); // grass
 
 	    		}
 
@@ -243,6 +230,18 @@ public class World {
 			}
 			
 		}
+		for(Agent a : agents){
+
+			if (a instanceof PreyAgent){
+
+				if (grass[a._x][a._y]){
+
+					((PreyAgent)a)._alive = false; // il n'a plus faim 
+
+	    			grass[a._x][a._y] = false; // l'herbe a été mangé
+	    		}
+	    	}
+	    }
 		
 	}
 	
