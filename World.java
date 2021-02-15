@@ -15,6 +15,10 @@ public class World {
 	int activeIndex;
 	
 	ArrayList<Agent> agents;
+
+	boolean[][] monde = new boolean[_dx][_dy];
+
+	double p_grass = 0.001;
 	
 	public World ( int __dx , int __dy, boolean __buffering, boolean __cloneBuffer )
 	{
@@ -191,10 +195,43 @@ public class World {
 	{
 		agents.add(agent);
 	}
+
+	public void initGrass(){
+
+		for ( int x = 0 ; x != _dx ; x++ )
+
+	    	for ( int y = 0 ; y != _dy ; y++ )
+
+	    		monde[(int)x][(int)y]=(1/2 >= Math.random()); // grass
+	    		
+	}
 	
 	public void stepWorld() // world THEN agents
 	{
-		// ...
+
+		for(Agent a : agents){
+
+			if (a instanceof PreyAgent){
+
+				if (monde[a._x][a._y]){
+
+					a._alive = false; // il n'a plus faim 
+
+	    			monde[a._x][a._y] = false // l'herbe a été mangé
+	    		}
+	    	}
+	    }
+
+		for ( int x = 0 ; x != _dx ; x++ )
+
+	    	for ( int y = 0 ; y != _dy ; y++ )
+
+	    		if ( !(monde[(int)x][(int)y]) ){
+
+	    			monde[(int)x][(int)y]=(p_grass >= Math.random()); // grass
+
+	    		}
+
 	}
 	
 	public void stepAgents() // world THEN agents
@@ -207,31 +244,7 @@ public class World {
 			
 		}
 		
-		// ArrayList<Agent> agents_remove = new ArrayList<>();
-		// for (Agent i :agents){
-		// 	for (Agent j : agents) {
-		// 		if (i == j) {continue;}
-		// 		if ((i instanceof PredatorAgent) && (j instanceof PreyAgent)) {
-		// 			if (i._x == j._x && i._y == j._y) {
-		// 				agents_remove.add(j);
-		// 			}
-		// 		}
-		// 	}
-		// }
-		// agents.removeAll(agents_remove);
-		
 	}
-
-	// public void reproduceAgent(){
-	// 	for( Agent a : agents ){
-	// 		if (a instanceof PredatorAgent){
-	// 			((PredatorAgent)a).reproduce();
-	// 		}
-	// 		else{
-	// 			((PreyAgent)a).reproduce();
-	// 		}
-	// 	}
-	// } 
 	
 	public void display( CAImageBuffer image )
 	{
