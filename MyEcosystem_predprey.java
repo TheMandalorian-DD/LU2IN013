@@ -69,7 +69,7 @@ public class MyEcosystem_predprey extends CAtoolbox {
 		
 	    // mise a jour de l'etat du monde
 
-	    int l = 25; //itération famine
+	    int l = 25; //délai de famine
 	    int cpt = 0;
 		
 		while ( it != nombreDePasMaximum )
@@ -230,6 +230,19 @@ public class MyEcosystem_predprey extends CAtoolbox {
 							((PredatorAgent)i)._predator = true; //il commence à avoir faim
 
 						}
+
+					} else {
+
+						if (((PreyAgent)i)._alive){
+
+							agents_remove.add(i);
+
+						} else {
+
+							((PreyAgent)i)._alive = true;
+
+						}
+
 					}
 				}
 			}
