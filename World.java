@@ -202,21 +202,34 @@ public class World {
 	
 	public void add (Agent agent)
 	{
-		if (agent instanceof PredatorAgent)
-            predatorAgents.add((PredatorAgent) agent);
-        if (agent instanceof PreyAgent)
-            preyAgents.add((PreyAgent) agent);
+
+		if (agent instanceof PredatorAgent){
+
+			predatorAgents.add((PredatorAgent) agent);
+
+		}
+
+		if (agent instanceof PreyAgent){
+
+			preyAgents.add((PreyAgent) agent);
+
+		}
+
     }
 
-	// public void initGrass(){
+	public void initGrass(){
 
-	// 	for ( int x = 0 ; x != _dx ; x++ )
+		for ( int x = 0 ; x != _dx ; x++ ){
 
-	//     	for ( int y = 0 ; y != _dy ; y++ )
+	    	for ( int y = 0 ; y != _dy ; y++ ){
 
-	//     		grass[(int)x][(int)y]=(0.5 >= Math.random()); // grass
+	    		grass[(int)x][(int)y]=(0.5 >= Math.random()); // grass
+
+	    	}
+
+	    }
 	    		
-	// }
+	}
 	
 	public void stepWorld() // world THEN agents
 	{
@@ -225,11 +238,15 @@ public class World {
 
 		Iterator<PredatorAgent> iterPredator = predatorAgents.iterator();
 
-        while (iterPredator.hasNext()) {
+		while (iterPredator.hasNext()) {
 
             PredatorAgent i = iterPredator.next();
 
-            if (!i.isAlive()) iterPredator.remove();
+            if (!i.isAlive()){
+
+            	iterPredator.remove();
+            
+            }
 
             Iterator<PreyAgent> iterPrey = preyAgents.iterator();
 
@@ -248,44 +265,50 @@ public class World {
 
   //       //L'herbe repousse ou pas
 
-		// for ( int x = 0 ; x != _dx ; x++ )
+		for ( int x = 0 ; x != _dx ; x++ ){
 
-	 //    	for ( int y = 0 ; y != _dy ; y++ )
+			for ( int y = 0 ; y != _dy ; y++ ){
 
-	 //    		if ( !(grass[(int)x][(int)y]) ){
+				if ( !(grass[(int)x][(int)y]) ){
 
-	 //    			grass[(int)x][(int)y]=(p_grass >= Math.random()); // grass
+					grass[(int)x][(int)y]=(p_grass >= Math.random()); // grass
 
-	 //    		}
+	    		}
+	    	}
+	    }
 
 	}
 
 	public void reproduce(Agent agent){
 
-        if (agent instanceof PredatorAgent)
+        if (agent instanceof PredatorAgent){
 
-            reproduirePredatorsAgents.add((PredatorAgent) agent);
+        	reproduirePredatorsAgents.add((PredatorAgent) agent);
 
-        if (agent instanceof PreyAgent)
+        }
 
-            reproduirePreyAgents.add((PreyAgent) agent);
+        if (agent instanceof PreyAgent){
+
+        	reproduirePreyAgents.add((PreyAgent) agent);
+
+        }
     }
 	
 	public void stepAgents() // world THEN agents
 	{
 		preyAgents.forEach(prey -> {
 
-            synchronized (Buffer0) {
+			synchronized (Buffer0) {
 
-                prey.step();
+				prey.step();
             }
         });
 
         predatorAgents.forEach(predator -> {
 
-            synchronized (Buffer0) {
+        	synchronized (Buffer0) {
 
-                predator.step();
+        		predator.step();
 
             }
         });
@@ -301,22 +324,26 @@ public class World {
 
 		// On vérifie si les proies se trouvent sur de l'herbe
 
-		// Iterator<PreyAgent> iterPrey = preyAgents.iterator();
+		Iterator<PreyAgent> iterPrey = preyAgents.iterator();
 
-  //       while (iterPrey.hasNext()) {
+		while (iterPrey.hasNext()) {
 
-  //       	PreyAgent i = iterPrey.next();
+			PreyAgent i = iterPrey.next();
 
-  //       	if (!i.isAlive()) iterPrey.remove();
+        	if (!i.isAlive()){
 
-  //       	if (grass[i._x][i._y]){
+        		iterPrey.remove();
 
-  //       		i.reset_mange();
+        	}
 
-  //       		grass[i._x][i._y] = false; 
+        	if (grass[i._x][i._y]){
 
-  //           }
-  //       }
+        		i.reset_mange();
+
+        		grass[i._x][i._y] = false; 
+
+            }
+        }
 		
 	}
 	
