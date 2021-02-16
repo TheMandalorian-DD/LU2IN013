@@ -46,7 +46,7 @@ public class PredatorAgent extends Agent {
 			_orient = (_orient-1+4) %4;
 		}
 
-		for(Agent a : _worl.agents){
+		for(Agent a : _worl.agents){ 
 
 			if (a instanceof PreyAgent){
 

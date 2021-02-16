@@ -121,95 +121,95 @@ public class MyEcosystem_predprey extends CAtoolbox {
 
 			// Les proies fuient les predateurs
 
-			for(Agent i : world.agents){
+			// for(Agent i : world.agents){
 
-				 if (i instanceof PreyAgent){
+			// 	 if (i instanceof PreyAgent){
 
-				 	int dist = Integer.MAX_VALUE;
+			// 	 	int dist = Integer.MAX_VALUE;
 
-				 	Agent close_pred = null;
+			// 	 	Agent close_pred = null;
 
-				 	int r = 4;
+			// 	 	int r = 4;
 
-				 	for ( int x2 = i._x-r ; x2 <= i._x+r ; x2++ ){
+			// 	 	for ( int x2 = i._x-r ; x2 <= i._x+r ; x2++ ){
 
-						for ( int y2 = i._y-r ; y2 <= i._y+r ; y2++ ){
+			// 			for ( int y2 = i._y-r ; y2 <= i._y+r ; y2++ ){
 
-							for(Agent j : world.agents){
+			// 				for(Agent j : world.agents){
 
-								if (j instanceof PredatorAgent){
+			// 					if (j instanceof PredatorAgent){
 
-									if ((j._x==x2 && j._y==y2) && (dist > i.distance(j._x,j._y))){
+			// 						if ((j._x==x2 && j._y==y2) && (dist > i.distance(j._x,j._y))){
 
-										dist = i.distance(j._x,j._y);
+			// 							dist = i.distance(j._x,j._y);
 
-										close_pred = j;
+			// 							close_pred = j;
 
-									}
-								}
-							}
-						}
-					}
-					if (close_pred != null){
+			// 						}
+			// 					}
+			// 				}
+			// 			}
+			// 		}
+			// 		if (close_pred != null){
 
-						if (close_pred._orient == 0){
+			// 			if (close_pred._orient == 0){
 
-							i._orient = 2;
-						}
-						if (close_pred._orient == 1){
+			// 				i._orient = 2;
+			// 			}
+			// 			if (close_pred._orient == 1){
 
-							i._orient = 3;
-						}
-						if (close_pred._orient == 2){
+			// 				i._orient = 3;
+			// 			}
+			// 			if (close_pred._orient == 2){
 
-							i._orient = 0;
-						}
-						if (close_pred._orient == 3){
+			// 				i._orient = 0;
+			// 			}
+			// 			if (close_pred._orient == 3){
 
-							i._orient = 1;
-						}
-					}
-				}
-			}
+			// 				i._orient = 1;
+			// 			}
+			// 		}
+			// 	}
+			// }
 
 
 				
 
 			// Les predateur chassent les proies les plus proches
 
-			for(Agent i : world.agents){
+			// for(Agent i : world.agents){
 
-				if (i instanceof PredatorAgent){
+			// 	if (i instanceof PredatorAgent){
 
-					int dist = Integer.MAX_VALUE;
+			// 		int dist = Integer.MAX_VALUE;
 
-					Agent close_prey = null;
+			// 		Agent close_prey = null;
 
-					int r = 5;
+			// 		int r = 5;
 
-					for ( int x2 = i._x-r ; x2 <= i._x+r ; x2++ ){
+			// 		for ( int x2 = i._x-r ; x2 <= i._x+r ; x2++ ){
 
-						for ( int y2 = i._y-r ; y2 <= i._y+r ; y2++ ){
+			// 			for ( int y2 = i._y-r ; y2 <= i._y+r ; y2++ ){
 
-							for(Agent j : world.agents){
+			// 				for(Agent j : world.agents){
 
-								if (j instanceof PreyAgent){
+			// 					if (j instanceof PreyAgent){
 
-									if ((j._x==x2 && j._y==y2) && (dist > i.distance(j._x,j._y))){
+			// 						if ((j._x==x2 && j._y==y2) && (dist > i.distance(j._x,j._y))){
 
-										dist = i.distance(j._x,j._y);
+			// 							dist = i.distance(j._x,j._y);
 
-										close_prey = j;
-									}
-								}
-							}
-						}
-					}
-					if (close_prey != null){
-						i._orient = close_prey._orient;
-					}
-				}
-			}
+			// 							close_prey = j;
+			// 						}
+			// 					}
+			// 				}
+			// 			}
+			// 		}
+			// 		if (close_prey != null){
+			// 			i._orient = close_prey._orient;
+			// 		}
+			// 	}
+			// }
 
 			// Les predateur meurent s'ils n'ont pas mangé à L itérations
 
