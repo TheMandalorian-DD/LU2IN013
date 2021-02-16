@@ -1,5 +1,6 @@
 import java.io.*;
-import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 public class MyEcosystem_predprey extends CAtoolbox {
 
@@ -8,14 +9,14 @@ public class MyEcosystem_predprey extends CAtoolbox {
 
 		// initialisation generale
 	    
-		int dx = 10;
-		int dy = 10;
+		int dx = 50;
+		int dy = 50;
 
-		int nbPrey =1;
-		int nbPred = 1;
+		int nbPrey = 1500;
+		int nbPred = 100;
 		
-		int displayWidth = 200;  // 200
-		int displayHeight = 200; // 200
+		int displayWidth = 400;  // 200
+		int displayHeight = 400; // 200
 
 		// pick dimension for display
 		if ( displayWidth < 200 )
@@ -63,7 +64,7 @@ public class MyEcosystem_predprey extends CAtoolbox {
 		for ( int i = 0 ; i != nbPred ; i++ )
 			world.add(new PredatorAgent((int)(Math.random()*dx),(int)(Math.random()*dy),world));
 
-		world.initGrass();
+		// world.initGrass();
 
 
 		
@@ -71,12 +72,15 @@ public class MyEcosystem_predprey extends CAtoolbox {
 
 	    // int l = 25; //délai de famine
 	    // int cpt = 0;
+
+	    int prey;
+	    int pred;
 		
 		while ( it != nombreDePasMaximum )
 		{
 
-			nbPred=0;
-			nbPrey=0;
+			prey=0;
+			pred=0;
 			// 1 - display
 			
 			if ( it % displaySpeed == 0 )
@@ -247,14 +251,8 @@ public class MyEcosystem_predprey extends CAtoolbox {
 
 			world.step();
 
-			for(Agent a : world.agents){
-				if (a instanceof PredatorAgent){
-					nbPred++;
-				}
-				else{
-					nbPrey++;
-				}
-			}
+			// world.preyAgents.forEach(p -> prey++);
+   //      	world.predatorAgents.forEach(p-> pred++);
 
 			
 			// 3 - iterate

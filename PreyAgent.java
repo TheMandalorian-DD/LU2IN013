@@ -1,3 +1,5 @@
+import java.util.Iterator;
+import java.util.LinkedList;
 
 public class PreyAgent extends Agent {
 
@@ -28,7 +30,7 @@ public class PreyAgent extends Agent {
 
 	public void reproduce(){
 		if (Math.random() < p_reproduce){
-			_world.add(new PredatorAgent(_x,_y,_world));
+			_world.reproduce(new PreyAgent(_x,_y,_world));
 		}
 	}
 	
@@ -39,6 +41,7 @@ public class PreyAgent extends Agent {
 		// ... A COMPLETER
 
 		// On vérifie si la proie n'a pas mangé après delai_de_famine itérations
+
 		it_non_mange++;
         if (it_non_mange > delai_de_famine){
             _alive = false;
@@ -46,7 +49,8 @@ public class PreyAgent extends Agent {
         }
 
 		// Reproduction
-		reproduce();
+
+		this.reproduce();
 
 
 
@@ -63,27 +67,29 @@ public class PreyAgent extends Agent {
 		else
 			_orient = (_orient - 1 + 4) % 4;
 
-		for(Agent a : _worl.agents){
+		Iterator<PredatorAgent> iterPredator = _world.predatorAgents.iterator();
 
-			if (a instanceof PredatorAgent){
+        while (iterPredator.hasNext()) {
 
-				if (_y-1==a._y && _x==a._x){ // nord
+        	Agent a = iterPredator.next();
 
-					_orient=2;
+				if (_y-1==a._y && _x==a._x){ // si nord
+
+					_orient=2; //alors sud
 				}
-				if (_y+1==a._y && _x==a._x){ // sud
+				if (_y+1==a._y && _x==a._x){ // si sud
 
-					_orient=0;
+					_orient=0; // alors nord
 				}
-				if (_y==a._y && _x+1==a._x){ // est 
+				if (_y==a._y && _x+1==a._x){ // si est 
 
-					_orient=3;
+					_orient=3; // alors ouest
 				}
-				if (_y-1==a._y && _x-1==a._x){ // ouest
+				if (_y-1==a._y && _x-1==a._x){ // si ouest
 
-					_orient=1;
+					_orient=1; // alors est
 				}
-			}	
+				
 		}
 
 		// met a jour: la position de l'agent (depend de l'orientation)

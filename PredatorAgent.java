@@ -1,4 +1,7 @@
 
+import java.util.Iterator;
+import java.util.LinkedList;
+
 public class PredatorAgent extends Agent {
 
 	static double p_reproduce = 0.04;
@@ -25,7 +28,7 @@ public class PredatorAgent extends Agent {
 
 	public void reproduce(){
 		if (Math.random() < p_reproduce){
-			_world.add(new PredatorAgent(_x,_y,_world));
+			_world.reproduce(new PredatorAgent(_x,_y,_world));
 		}
 	}
 	
@@ -43,7 +46,7 @@ public class PredatorAgent extends Agent {
         }
 
 		// Reproduction
-		reproduce();
+		this.reproduce();
 
 
 		int cellColor[] = _world.getCellState(_x, _y);
@@ -61,9 +64,11 @@ public class PredatorAgent extends Agent {
 			_orient = (_orient-1+4) %4;
 		}
 
-		for(Agent a : _worl.agents){ 
+		Iterator<PreyAgent> iterPrey = _world.preyAgents.iterator();
 
-			if (a instanceof PreyAgent){
+        while (iterPrey.hasNext()) {
+
+        	Agent a = iterPrey.next();
 
 				if (_y-1==a._y && _x==a._x){ // nord
 
@@ -81,7 +86,7 @@ public class PredatorAgent extends Agent {
 
 					_orient=3;
 				}
-			}	
+				
 		}
 
 		// met a jour: la position de l'agent (depend de l'orientation)
