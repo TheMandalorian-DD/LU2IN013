@@ -54,9 +54,9 @@ public class PredatorAgent extends Agent {
 
 					if (j instanceof PreyAgent){
 
-						if ((j._x==x2 && j._y==y2) && (dist > i.distance(j._x,j._y))){
+						if ((j._x==x2 && j._y==y2) && (dist > super.distance(j._x,j._y))){
 
-							dist = i.distance(j._x,j._y);
+							dist = super.distance(j._x,j._y);
 
 							close_prey = j;
 						}
@@ -72,7 +72,7 @@ public class PredatorAgent extends Agent {
 			int i = 0;
 
 			while(i<5){
-				
+
 			}
 
 		}else{
