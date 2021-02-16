@@ -64,7 +64,7 @@ public class MyEcosystem_predprey extends CAtoolbox {
 		for ( int i = 0 ; i != nbPred ; i++ )
 			world.add(new PredatorAgent((int)(Math.random()*dx),(int)(Math.random()*dy),world));
 
-		// world.initGrass();
+		//world.initGrass();
 
 
 		

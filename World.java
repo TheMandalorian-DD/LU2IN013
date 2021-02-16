@@ -21,7 +21,7 @@ public class World {
     LinkedList<PreyAgent> reproduirePreyAgents;
     LinkedList<PredatorAgent> reproduirePredatorsAgents;
 
-	boolean[][] grass = new boolean[_dx][_dy];
+	boolean[][] grass; 
 
 	double p_grass = 0.001;
 	
@@ -42,6 +42,10 @@ public class World {
         preyAgents = new LinkedList<>();
         reproduirePreyAgents = new LinkedList<>();
         reproduirePredatorsAgents = new LinkedList<>();
+
+        grass = new boolean[_dx][_dy];
+
+        initGrass();
 		
 	    for ( int x = 0 ; x != _dx ; x++ )
 	    	for ( int y = 0 ; y != _dy ; y++ )
@@ -52,6 +56,7 @@ public class World {
     			Buffer1[x][y][0]=255;
     			Buffer1[x][y][1]=255;
     			Buffer1[x][y][2]=255;
+    			//grass[x][y]=0.5 >= Math.random();
 	    	}
 	}
 	
@@ -269,7 +274,7 @@ public class World {
 
 			for ( int y = 0 ; y != _dy ; y++ ){
 
-				if ( !(grass[(int)x][(int)y]) ){
+				if ( ! grass[(int)x][(int)y] ){
 
 					grass[(int)x][(int)y]=(p_grass >= Math.random()); // grass
 
