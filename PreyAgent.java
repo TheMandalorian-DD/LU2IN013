@@ -67,30 +67,30 @@ public class PreyAgent extends Agent {
 		else
 			_orient = (_orient - 1 + 4) % 4;
 
-		Iterator<PredatorAgent> iterPredator = _world.predatorAgents.iterator();
+		// Iterator<PredatorAgent> iterPredator = _world.predatorAgents.iterator();
 
-        while (iterPredator.hasNext()) {
+  //       while (iterPredator.hasNext()) {
 
-        	Agent a = iterPredator.next();
+  //       	Agent a = iterPredator.next();
 
-				if (_y-1==a._y && _x==a._x){ // si nord
+		// 		if (_y-1==a._y && _x==a._x){ // si nord
 
-					_orient=2; //alors sud
-				}
-				if (_y+1==a._y && _x==a._x){ // si sud
+		// 			_orient=2; //alors sud
+		// 		}
+		// 		if (_y+1==a._y && _x==a._x){ // si sud
 
-					_orient=0; // alors nord
-				}
-				if (_y==a._y && _x+1==a._x){ // si est 
+		// 			_orient=0; // alors nord
+		// 		}
+		// 		if (_y==a._y && _x+1==a._x){ // si est 
 
-					_orient=3; // alors ouest
-				}
-				if (_y-1==a._y && _x-1==a._x){ // si ouest
+		// 			_orient=3; // alors ouest
+		// 		}
+		// 		if (_y-1==a._y && _x-1==a._x){ // si ouest
 
-					_orient=1; // alors est
-				}
+		// 			_orient=1; // alors est
+		// 		}
 				
-		}
+		// }
 
 		// met a jour: la position de l'agent (depend de l'orientation)
 		switch (_orient) {

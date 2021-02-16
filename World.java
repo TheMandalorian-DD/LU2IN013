@@ -264,6 +264,37 @@ public class World {
                     iterPrey.remove();
 
                     i.reset_mange();
+
+                    continue;
+                }
+                if (i._x == j._x){
+
+                    if (i._y == j._y+1) {
+
+                        i._orient=2;
+                        j._orient=2;
+                    }
+
+                    if (i._y == j._y-1){
+
+                        i._orient=0;
+                        j._orient=0;
+                    }
+                }
+
+                if (i._y == j._y){
+
+                    if (i._x == j._x+1){
+
+                        i._orient=3;
+                        j._orient=3;
+                    }
+
+                    if (i._x == j._x-1){
+                    	
+                        i._orient=1;
+                        j._orient=1;
+                    }
                 }
             }
         }

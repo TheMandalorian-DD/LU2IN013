@@ -12,11 +12,11 @@ public class MyEcosystem_predprey extends CAtoolbox {
 		int dx = 50;
 		int dy = 50;
 
-		int nbPrey = 1500;
-		int nbPred = 100;
+		int nbPrey = 10;
+		int nbPred = 10;
 		
-		int displayWidth = 400;  // 200
-		int displayHeight = 400; // 200
+		int displayWidth = 200;  // 200
+		int displayHeight = 200; // 200
 
 		// pick dimension for display
 		if ( displayWidth < 200 )
