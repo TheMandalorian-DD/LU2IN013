@@ -209,6 +209,33 @@ public class World {
 	public void stepWorld() // world THEN agents
 	{
 
+		// Predateurs mangent les proies sur la meme case
+
+		ArrayList<Agent> agents_remove = new ArrayList<>();
+
+        for (Agent i : agents) {
+
+            if (i instanceof PredatorAgent && !((PredatorAgent) i).isAlive()) agents_remove.add(i); //si le pred est mort.
+
+            for (Agent j : agents) {
+
+                if (i instanceof PredatorAgent && j instanceof PredatorAgent) continue; // pas obligatoire
+
+                if ((i instanceof PredatorAgent) && ((PredatorAgent) i).isAlive() && (j instanceof PreyAgent)) {
+
+                    if (i._x == j._x && i._y == j._y) {
+
+                        agents_remove.add(j); 
+
+                        ((PredatorAgent) i).reset_mange(); // le pred vient de manger
+                    }
+                }
+            }
+        }
+        agents.removeAll(agents_remove);
+
+        //L'herbe repousse ou pas
+
 		for ( int x = 0 ; x != _dx ; x++ )
 
 	    	for ( int y = 0 ; y != _dy ; y++ )
@@ -230,13 +257,16 @@ public class World {
 			}
 			
 		}
+
+		// On vérifie si les proies se trouvent sur de l'herbe
+
 		for(Agent a : agents){
 
 			if (a instanceof PreyAgent){
 
 				if (grass[a._x][a._y]){
 
-					((PreyAgent)a)._alive = false; // il n'a plus faim 
+					((PreyAgent)a).reset_mange(); // la proie mange
 
 	    			grass[a._x][a._y] = false; // l'herbe a été mangé
 	    		}

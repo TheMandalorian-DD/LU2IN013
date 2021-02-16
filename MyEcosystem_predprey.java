@@ -46,13 +46,13 @@ public class MyEcosystem_predprey extends CAtoolbox {
 
 	    // création du fichier
 //for (int f=1; f<=3; f++){
-	    BufferedWriter out = null;
-        try {
-            out = new BufferedWriter(new FileWriter("courbe_"+3+".txt",true));
-            out.write(0+" "+nbPrey+"\n");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+	    // BufferedWriter out = null;
+     //    try {
+     //        out = new BufferedWriter(new FileWriter("courbe_"+3+".txt",true));
+     //        out.write(0+" "+nbPrey+"\n");
+     //    } catch (IOException e) {
+     //        e.printStackTrace();
+     //    }
 
 	    // initialise l'ecosysteme
 	    
@@ -69,8 +69,8 @@ public class MyEcosystem_predprey extends CAtoolbox {
 		
 	    // mise a jour de l'etat du monde
 
-	    int l = 25; //délai de famine
-	    int cpt = 0;
+	    // int l = 25; //délai de famine
+	    // int cpt = 0;
 		
 		while ( it != nombreDePasMaximum )
 		{
@@ -80,44 +80,39 @@ public class MyEcosystem_predprey extends CAtoolbox {
 			// 1 - display
 			
 			if ( it % displaySpeed == 0 )
-				world.display(image); 
+				world.display(image);  
 
 			// 2 - update
 
 			// Reproduction des animaux
 
-			Agent agent = world.agents.get((int)(Math.random()*world.agents.size()));
-			if (agent instanceof PredatorAgent){
-				((PredatorAgent)agent).reproduce();
-			}else{
-				((PreyAgent)agent).reproduce();
-			}
+			// Agent agent = world.agents.get((int)(Math.random()*world.agents.size()));
+			// if (agent instanceof PredatorAgent){
+			// 	((PredatorAgent)agent).reproduce();
+			// }else{
+			// 	((PreyAgent)agent).reproduce();
+			// }
 
 			// Predateurs mangent les proies sur la meme case
 
-			ArrayList<Agent> agents_remove = new ArrayList<>();
+			// ArrayList<Agent> agents_remove = new ArrayList<>();
 
-			for (Agent i : world.agents){
+			// for (Agent i : world.agents){
 
-				for (Agent j : world.agents) {
+			// 	for (Agent j : world.agents) {
 
-					if (i instanceof PredatorAgent && j instanceof PredatorAgent) {
+			// 		if (i instanceof PredatorAgent && j instanceof PreyAgent){
 
-						continue;
-					}
+			// 			if (i._x == j._x && i._y == j._y){
 
-					if (i instanceof PredatorAgent && j instanceof PreyAgent){
+			// 				agents_remove.add(j);
 
-						if (i._x == j._x && i._y == j._y){
+			// 				((PredatorAgent)i)._predator = false; //il n'a plus faim
 
-							agents_remove.add(j);
-
-							((PredatorAgent)i)._predator = false; //il n'a plus faim
-
-						}
-					}
-				}
-			}
+			// 			}
+			// 		}
+			// 	}
+			// }
 
 			// Les proies fuient les predateurs
 
@@ -213,42 +208,42 @@ public class MyEcosystem_predprey extends CAtoolbox {
 
 			// Les predateur meurent s'ils n'ont pas mangé à L itérations
 
-			if (cpt==l){ // au bout de L itération
+			// if (cpt==l){ // au bout de L itération
 
-				cpt = 0;
+			// 	cpt = 0;
 
-				for(Agent i : world.agents){
+			// 	for(Agent i : world.agents){
 
-					if (i instanceof PredatorAgent){
+			// 		if (i instanceof PredatorAgent){
 
-						if (((PredatorAgent)i)._predator){ //si l'animal n'a toujours pas mangé
+			// 			if (((PredatorAgent)i)._predator){ //si l'animal n'a toujours pas mangé
 
-							agents_remove.add(i);
+			// 				agents_remove.add(i);
 
-						} else {
+			// 			} else {
 
-							((PredatorAgent)i)._predator = true; //il commence à avoir faim
+			// 				((PredatorAgent)i)._predator = true; //il commence à avoir faim
 
-						}
+			// 			}
 
-					} else {
+			// 		} else {
 
-						if (((PreyAgent)i)._alive){
+			// 			if (((PreyAgent)i)._alive){
 
-							agents_remove.add(i);
+			// 				agents_remove.add(i);
 
-						} else {
+			// 			} else {
 
-							((PreyAgent)i)._alive = true;
+			// 				((PreyAgent)i)._alive = true;
 
-						}
+			// 			}
 
-					}
-				}
-			}
+			// 		}
+			// 	}
+			// }
 			
 					
-			world.agents.removeAll(agents_remove);
+			//world.agents.removeAll(agents_remove);
 
 			world.step();
 
@@ -266,15 +261,15 @@ public class MyEcosystem_predprey extends CAtoolbox {
 			
 			it++;
 
-			cpt++;
+			//cpt++;
 
 			// On écrit dans le fichier
 
-			 try {
-                out.write(it+" "+nbPrey+"\n");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+			 // try {
+    //             out.write(it+" "+nbPrey+"\n");
+    //         } catch (IOException e) {
+    //             e.printStackTrace();
+    //         }
 
             if (nbPrey==0 || nbPred==0) break;
 			
@@ -285,10 +280,10 @@ public class MyEcosystem_predprey extends CAtoolbox {
 
 
 		}
-		try {
-            	out.close();
-            } catch (IOException e) {
-            e.printStackTrace();}
+		// try {
+  //           	out.close();
+  //           } catch (IOException e) {
+  //           e.printStackTrace();}
 		
 	}
 

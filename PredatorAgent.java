@@ -1,25 +1,30 @@
 
 public class PredatorAgent extends Agent {
 
-	boolean _predator;
-	double p_pred = 0.001;
-	// int energie;
-	// int seuil = 1000;
-	
-	public PredatorAgent( int __x, int __y, World __w )
-	{
-		super(__x,__y,__w);
-		
+	static double p_reproduce = 0.04;
+    static int delai_de_famine = 23;
+    boolean _predator;
+    boolean _alive;
+    int it_non_mange;
 
-		// _redValue = 255;
-		// _greenValue = 0;
-		// _blueValue = 0;
-		
-		_predator = true;
-	}
+    public PredatorAgent(int __x, int __y, World __w) {
+        super(__x, __y, __w);
+
+        _alive = true;
+        _predator = true;
+        it_non_mange = 0;
+    }
+
+    public void reset_mange() {
+        it_non_mange = 0;
+    }
+
+    public boolean isAlive() {
+        return _alive;
+    }
 
 	public void reproduce(){
-		if (Math.random() < p_pred){
+		if (Math.random() < p_reproduce){
 			_world.add(new PredatorAgent(_x,_y,_world));
 		}
 	}
@@ -29,6 +34,16 @@ public class PredatorAgent extends Agent {
 		// met a jour l'agent
 		
 		// A COMPLETER
+
+		// On vérifie si le pred n'a pas mangé après delai_de_famine itérations
+		it_non_mange++;
+        if (it_non_mange > delai_de_famine){
+            _alive = false;
+            return;
+        }
+
+		// Reproduction
+		reproduce();
 
 
 		int cellColor[] = _world.getCellState(_x, _y);

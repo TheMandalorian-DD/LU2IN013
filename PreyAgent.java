@@ -1,9 +1,11 @@
 
 public class PreyAgent extends Agent {
 
+	static double p_reproduce = 0.04;
+    static int delai_de_famine = 30;
 	boolean _alive; 
-	double p_prey = 0.001;
-	// int energie;
+	int it_non_mange;
+
 	
 	public PreyAgent( int __x, int __y, World __w )
 	{
@@ -16,19 +18,36 @@ public class PreyAgent extends Agent {
 		_alive = true;
 	}
 
+	 public void reset_mange() {
+        it_non_mange = 0;
+    }
+
+    public boolean isAlive() {
+        return _alive;
+    }
+
 	public void reproduce(){
-		if (Math.random() < p_prey){
-			_world.add(new PreyAgent(_x,_y,_world));
+		if (Math.random() < p_reproduce){
+			_world.add(new PredatorAgent(_x,_y,_world));
 		}
 	}
-
-
 	
 	public void step( )
 	{
 		// met a jour l'agent
 		
 		// ... A COMPLETER
+
+		// On vérifie si la proie n'a pas mangé après delai_de_famine itérations
+		it_non_mange++;
+        if (it_non_mange > delai_de_famine){
+            _alive = false;
+            return;
+        }
+
+		// Reproduction
+		reproduce();
+
 
 
 		int cellColor[] = _world.getCellState(_x, _y);
