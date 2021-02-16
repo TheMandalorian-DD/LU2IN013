@@ -1,15 +1,13 @@
 
 public class PreyAgent extends Agent {
 
-	boolean _alive;
+	boolean _alive; 
 	double p_prey = 0.001;
 	// int energie;
 	
 	public PreyAgent( int __x, int __y, World __w )
 	{
 		super(__x,__y,__w);
-
-		// energie = 10;
 		
 		_redValue = 0;
 		_greenValue = 0;
@@ -24,25 +22,14 @@ public class PreyAgent extends Agent {
 		}
 	}
 
-	// public void setEnergie(int e){
-	// 	energie=e;
-	// }
 
-	// public int getEnergie(){
-	// 	return energie;
-	//}
 	
 	public void step( )
 	{
 		// met a jour l'agent
-
-		// this.energie--;
 		
 		// ... A COMPLETER
 
-		// if (Math.random() < p_prey){
-		// 	_world.add(new PreyAgent(_x,_y,_world));
-		// }
 
 		int cellColor[] = _world.getCellState(_x, _y);
 
@@ -56,6 +43,29 @@ public class PreyAgent extends Agent {
 			_orient = (_orient + 1) % 4;
 		else
 			_orient = (_orient - 1 + 4) % 4;
+
+		for(Agent a : _worl.agents){
+
+			if (a instanceof PredatorAgent){
+
+				if (_y-1==a._y && _x==a._x){ // nord
+
+					_orient=2;
+				}
+				if (_y+1==a._y && _x==a._x){ // sud
+
+					_orient=0;
+				}
+				if (_y==a._y && _x+1==a._x){ // est 
+
+					_orient=3;
+				}
+				if (_y-1==a._y && _x-1==a._x){ // ouest
+
+					_orient=1;
+				}
+			}	
+		}
 
 		// met a jour: la position de l'agent (depend de l'orientation)
 		switch (_orient) {

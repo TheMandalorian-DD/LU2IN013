@@ -34,54 +34,39 @@ public class PredatorAgent extends Agent {
 		int cellColor[] = _world.getCellState(_x, _y);
 
 		
-		cellColor[redId] = 255;
+		cellColor[redId] = 255; 
 		cellColor[greenId] = 240;
 		cellColor[blueId] = 225;
 
 		_world.setCellState(_x, _y, cellColor);
 
-		int dist = Integer.MAX_VALUE;
-
-		Agent close_prey = null;
-
-		int r = 5;
-
-		for ( int x2 = _x-r ; x2 <= _x+r ; x2++ ){
-
-			for ( int y2 = _y-r ; y2 <= _y+r ; y2++ ){
-
-				for(Agent j : _world.agents){
-
-					if (j instanceof PreyAgent){
-
-						if ((j._x==x2 && j._y==y2) && (dist > super.distance(j._x,j._y))){
-
-							dist = super.distance(j._x,j._y);
-
-							close_prey = j;
-						}
-					}
-				}
-			}
-		}
-		
-
-		if (close_prey != null){
-
-			int d = Integer.MAX_VALUE;
-			int i = 0;
-
-			while(i<5){
-
-			}
-
-		}else{
-
 		if( Math.random() > 0.5 ){ // au hasard
 			_orient = (_orient+1) %4;
-
 		}else{
 			_orient = (_orient-1+4) %4;
+		}
+
+		for(Agent a : _worl.agents){
+
+			if (a instanceof PreyAgent){
+
+				if (_y-1==a._y && _x==a._x){ // nord
+
+					_orient=0;
+				}
+				if (_y+1==a._y && _x==a._x){ // sud
+
+					_orient=2;
+				}
+				if (_y==a._y && _x+1==a._x){ // est 
+
+					_orient=1;
+				}
+				if (_y-1==a._y && _x-1==a._x){ // ouest
+
+					_orient=3;
+				}
+			}	
 		}
 
 		// met a jour: la position de l'agent (depend de l'orientation)
