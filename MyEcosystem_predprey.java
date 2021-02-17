@@ -37,7 +37,7 @@ public class MyEcosystem_predprey extends CAtoolbox {
 					displayHeight = displayHeight * 2; 
 		
 		
-		int delai = 1;//100; // -- delay before refreshing display -- program is hold during delay, even if no screen update was requested. USE WITH CARE. 
+		int delai = 200;//100; // -- delay before refreshing display -- program is hold during delay, even if no screen update was requested. USE WITH CARE. 
 		int nombreDePasMaximum = Integer.MAX_VALUE;
 		int it = 0;
 		int displaySpeed = 1;//50; // from 1 to ...
@@ -47,13 +47,13 @@ public class MyEcosystem_predprey extends CAtoolbox {
 
 	    // création du fichier
 //for (int f=1; f<=3; f++){
-	    BufferedWriter out = null;
-        try {
-            out = new BufferedWriter(new FileWriter("question4_2"+".txt",true));
-            out.write(0+" "+nbPrey+"\n");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+	    // BufferedWriter out = null;
+     //    try {
+     //        out = new BufferedWriter(new FileWriter("question4_2"+".txt",true));
+     //        out.write(0+" "+nbPrey+"\n");
+     //    } catch (IOException e) {
+     //        e.printStackTrace();
+     //    }
 
 	    // initialise l'ecosysteme
 	    
@@ -246,11 +246,11 @@ public class MyEcosystem_predprey extends CAtoolbox {
 
 			// On écrit dans le fichier
 
-			try {
-                out.write(it + " " + nb[0] + " " + nb[1] + "\n");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+			// try {
+   //              out.write(it + " " + nb[0] + " " + nb[1] + "\n");
+   //          } catch (IOException e) {
+   //              e.printStackTrace();
+   //          }
 
 			
 
@@ -270,10 +270,10 @@ public class MyEcosystem_predprey extends CAtoolbox {
 
 
 		}
-		try {
-            	out.close();
-            } catch (IOException e) {
-            e.printStackTrace();}
+		// try {
+  //           	out.close();
+  //           } catch (IOException e) {
+  //           e.printStackTrace();}
 		
 	}
 
