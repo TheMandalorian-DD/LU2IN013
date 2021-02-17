@@ -1,5 +1,5 @@
 # LU2IN013 TP Agent
 
-*Seulement les classes PredatorAgent, PreyAgent, World et MyEcosystem_predprey ont été modifié*
+*Seulement les classes PredatorAgent, PreyAgent, World et MyEcosystem_predprey ont été modifié.*
 
-*Les numéros des questions ont été mis en commentaire aux codes qui les correspondent*
+*Les numéros des questions ont été mis en commentaire au code correspondant. *
