@@ -272,6 +272,8 @@ public class World {
 
             		iterPrey.remove();
 
+            		continue;
+
             	}
 
             	// QUESTION 6 : une proie mange l'herbe si elle se trouve sur de l'herbe
