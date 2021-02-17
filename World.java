@@ -23,7 +23,7 @@ public class World {
 
 	boolean[][] grass; 
 
-	double p_grass = 0.05;
+	double p_grass = 0.06;
 	
 	public World ( int __dx , int __dy, boolean __buffering, boolean __cloneBuffer )
 	{
@@ -246,13 +246,13 @@ public class World {
 	public void stepWorld() // world THEN agents
 	{
 
-		// Predateurs mangent les proies sur la meme case
-
 		Iterator<PredatorAgent> iterPredator = predatorAgents.iterator();
 
 		while (iterPredator.hasNext()) {
 
             PredatorAgent i = iterPredator.next();
+
+            // QUESTION 3 : un predateur meurt s'il n'a pas mangé
 
             if (!i.isAlive()){
 
@@ -264,7 +264,27 @@ public class World {
 
             while (iterPrey.hasNext()) {
 
-                PreyAgent j = iterPrey.next();
+            	PreyAgent j = iterPrey.next();
+
+            	// QUESTION 6 : une proie meurt si elle n'a pas mangé 
+
+            	if (!j.isAlive()){
+
+            		iterPrey.remove();
+
+            	}
+
+            	// QUESTION 6 : une proie mange l'herbe si elle se trouve sur de l'herbe
+
+            	if (grass[j._x][j._y]){
+
+            		j.reset_mange();
+
+            		grass[j._x][j._y] = false;
+
+            	}
+
+            	// QUESTION 1 : Les Predateurs mangent les proies sur la meme case
 
                 if (i._x == j._x && i._y == j._y) {
 
@@ -274,18 +294,23 @@ public class World {
 
                     continue;
                 }
+
+                // QUESTION 5 : Les predateurs chassent les proies, les proies fuient les predateurs
+
                 if (i._x == j._x){
 
                     if (i._y == j._y+1) {
 
-                        i.setDirection(2);
-                        j.setDirection(2);
+                        i.setDirection(0);
+                        j.setDirection(0);
+                        continue;
                     }
 
                     if (i._y == j._y-1){
 
-                        i.setDirection(0);
-                        j.setDirection(0);
+                        i.setDirection(2);
+                        j.setDirection(2);
+                        continue;
                     }
                 }
 
@@ -295,6 +320,7 @@ public class World {
 
                         i.setDirection(3);
                         j.setDirection(3);
+                        continue;
                     }
 
                     if (i._x == j._x-1){
@@ -306,7 +332,13 @@ public class World {
             }
         }
 
-  //       //L'herbe repousse ou pas
+        // QUESTION 6 : l'herbe repousse selon p_grass
+
+        repousse_grass();
+	}
+
+
+	public void repousse_grass(){
 
 		for ( int x = 0 ; x != _dx ; x++ ){
 
@@ -363,30 +395,7 @@ public class World {
         reproduirePreyAgents.clear();
 
         reproduirePredatorsAgents.clear();
-    
-
-		// On vérifie si les proies se trouvent sur de l'herbe
-
-		Iterator<PreyAgent> iterPrey = preyAgents.iterator();
-
-		while (iterPrey.hasNext()) {
-
-			PreyAgent i = iterPrey.next();
-
-        	if (!i.isAlive()){
-
-        		iterPrey.remove();
-
-        	}
-
-        	if (grass[i._x][i._y]){
-
-        		i.reset_mange();
-
-        		grass[i._x][i._y] = false; 
-
-            }
-        }
+   
 		
 	}
 	

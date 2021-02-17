@@ -3,8 +3,8 @@ import java.util.LinkedList;
 
 public class PreyAgent extends Agent {
 
-	static double p_reproduce = 0.015;
-    static int delai_de_famine = 15;
+	static double p_reproduce = 0.07; //Q3 : p_reproduce = 0.05
+    static int delai_de_famine = 16; 
 	boolean _alive; 
 	int it_non_mange;
 	int dir;
@@ -28,7 +28,7 @@ public class PreyAgent extends Agent {
             dir = d;
             return;
         }
-        if (Math.random()<0.5) dir =d;
+        if (Math.random()<0.5) dir = d;
     }
 
 	 public void reset_mange() {
@@ -80,31 +80,6 @@ public class PreyAgent extends Agent {
 
 		if (dir != -1) _orient = dir;
         dir = -1;
-
-		// Iterator<PredatorAgent> iterPredator = _world.predatorAgents.iterator();
-
-  //       while (iterPredator.hasNext()) {
-
-  //       	Agent a = iterPredator.next();
-
-		// 		if (_y-1==a._y && _x==a._x){ // si nord
-
-		// 			_orient=2; //alors sud
-		// 		}
-		// 		if (_y+1==a._y && _x==a._x){ // si sud
-
-		// 			_orient=0; // alors nord
-		// 		}
-		// 		if (_y==a._y && _x+1==a._x){ // si est 
-
-		// 			_orient=3; // alors ouest
-		// 		}
-		// 		if (_y-1==a._y && _x-1==a._x){ // si ouest
-
-		// 			_orient=1; // alors est
-		// 		}
-				
-		// }
 
 		// met a jour: la position de l'agent (depend de l'orientation)
 		switch (_orient) {

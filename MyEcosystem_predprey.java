@@ -9,11 +9,11 @@ public class MyEcosystem_predprey extends CAtoolbox {
 
 		// initialisation generale
 	    
-		int dx = 50;
-		int dy = 50;
+		int dx = 20; //50
+		int dy = 20; //50
 
-		int nbPrey = 40;
-		int nbPred = 30;
+		int nbPrey = 10; //40
+		int nbPred = 10; //30
 		
 		int displayWidth = 400;  // 200
 		int displayHeight = 400; // 200
@@ -37,7 +37,7 @@ public class MyEcosystem_predprey extends CAtoolbox {
 					displayHeight = displayHeight * 2; 
 		
 		
-		int delai = 200;//100; // -- delay before refreshing display -- program is hold during delay, even if no screen update was requested. USE WITH CARE. 
+		int delai = 1;//100; // -- delay before refreshing display -- program is hold during delay, even if no screen update was requested. USE WITH CARE. 
 		int nombreDePasMaximum = Integer.MAX_VALUE;
 		int it = 0;
 		int displaySpeed = 1;//50; // from 1 to ...
@@ -49,7 +49,7 @@ public class MyEcosystem_predprey extends CAtoolbox {
 //for (int f=1; f<=3; f++){
 	    BufferedWriter out = null;
         try {
-            out = new BufferedWriter(new FileWriter("courbe_ideal"+".txt",true));
+            out = new BufferedWriter(new FileWriter("question4_2"+".txt",true));
             out.write(0+" "+nbPrey+"\n");
         } catch (IOException e) {
             e.printStackTrace();
@@ -261,11 +261,7 @@ public class MyEcosystem_predprey extends CAtoolbox {
 
 			//cpt++;
 
-			// On écrit dans le fichier
-
-			if (it==500) break;
-
-            if (nb[0]==0 || nb[1]==0) break;
+            if (nb[0]==0 || nb[1]==0 || it==500) break;
 			
 			try {
 				Thread.sleep(delai);
