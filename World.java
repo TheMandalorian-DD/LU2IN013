@@ -23,7 +23,7 @@ public class World {
 
 	boolean[][] grass; 
 
-	double p_grass = 0.001;
+	double p_grass = 0.05;
 	
 	public World ( int __dx , int __dy, boolean __buffering, boolean __cloneBuffer )
 	{
@@ -235,6 +235,13 @@ public class World {
 	    }
 	    		
 	}
+
+	public int[] getNumbers() {
+        int[] nb = new int[2];
+        preyAgents.forEach(p -> nb[0]++);
+        predatorAgents.forEach(p -> nb[1]++);
+        return nb;
+    }
 	
 	public void stepWorld() // world THEN agents
 	{
@@ -257,7 +264,7 @@ public class World {
 
             while (iterPrey.hasNext()) {
 
-                Agent j = iterPrey.next();
+                PreyAgent j = iterPrey.next();
 
                 if (i._x == j._x && i._y == j._y) {
 
@@ -271,14 +278,14 @@ public class World {
 
                     if (i._y == j._y+1) {
 
-                        i._orient=2;
-                        j._orient=2;
+                        i.setDirection(2);
+                        j.setDirection(2);
                     }
 
                     if (i._y == j._y-1){
 
-                        i._orient=0;
-                        j._orient=0;
+                        i.setDirection(0);
+                        j.setDirection(0);
                     }
                 }
 
@@ -286,14 +293,14 @@ public class World {
 
                     if (i._x == j._x+1){
 
-                        i._orient=3;
-                        j._orient=3;
+                        i.setDirection(3);
+                        j.setDirection(3);
                     }
 
                     if (i._x == j._x-1){
-                    	
-                        i._orient=1;
-                        j._orient=1;
+
+                        i.setDirection(1);
+                        j.setDirection(1);
                     }
                 }
             }

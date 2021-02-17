@@ -3,10 +3,11 @@ import java.util.LinkedList;
 
 public class PreyAgent extends Agent {
 
-	static double p_reproduce = 0.04;
-    static int delai_de_famine = 30;
+	static double p_reproduce = 0.015;
+    static int delai_de_famine = 15;
 	boolean _alive; 
 	int it_non_mange;
+	int dir;
 
 	
 	public PreyAgent( int __x, int __y, World __w )
@@ -16,9 +17,19 @@ public class PreyAgent extends Agent {
 		_redValue = 0;
 		_greenValue = 0;
 		_blueValue = 255;
+
+		dir = -1;
 		
 		_alive = true;
 	}
+
+	public void setDirection(int d) {
+        if (dir == -1) {
+            dir = d;
+            return;
+        }
+        if (Math.random()<0.5) dir =d;
+    }
 
 	 public void reset_mange() {
         it_non_mange = 0;
@@ -66,6 +77,9 @@ public class PreyAgent extends Agent {
 			_orient = (_orient + 1) % 4;
 		else
 			_orient = (_orient - 1 + 4) % 4;
+
+		if (dir != -1) _orient = dir;
+        dir = -1;
 
 		// Iterator<PredatorAgent> iterPredator = _world.predatorAgents.iterator();
 

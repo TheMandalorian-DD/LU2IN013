@@ -12,11 +12,11 @@ public class MyEcosystem_predprey extends CAtoolbox {
 		int dx = 50;
 		int dy = 50;
 
-		int nbPrey = 10;
-		int nbPred = 10;
+		int nbPrey = 40;
+		int nbPred = 30;
 		
-		int displayWidth = 200;  // 200
-		int displayHeight = 200; // 200
+		int displayWidth = 400;  // 200
+		int displayHeight = 400; // 200
 
 		// pick dimension for display
 		if ( displayWidth < 200 )
@@ -47,13 +47,13 @@ public class MyEcosystem_predprey extends CAtoolbox {
 
 	    // création du fichier
 //for (int f=1; f<=3; f++){
-	    // BufferedWriter out = null;
-     //    try {
-     //        out = new BufferedWriter(new FileWriter("courbe_"+3+".txt",true));
-     //        out.write(0+" "+nbPrey+"\n");
-     //    } catch (IOException e) {
-     //        e.printStackTrace();
-     //    }
+	    BufferedWriter out = null;
+        try {
+            out = new BufferedWriter(new FileWriter("courbe_ideal"+".txt",true));
+            out.write(0+" "+nbPrey+"\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 	    // initialise l'ecosysteme
 	    
@@ -64,23 +64,14 @@ public class MyEcosystem_predprey extends CAtoolbox {
 		for ( int i = 0 ; i != nbPred ; i++ )
 			world.add(new PredatorAgent((int)(Math.random()*dx),(int)(Math.random()*dy),world));
 
-		//world.initGrass();
-
-
+	
 		
 	    // mise a jour de l'etat du monde
 
-	    // int l = 25; //délai de famine
-	    // int cpt = 0;
-
-	    int prey;
-	    int pred;
+	
 		
 		while ( it != nombreDePasMaximum )
 		{
-
-			prey=0;
-			pred=0;
 			// 1 - display
 			
 			if ( it % displaySpeed == 0 )
@@ -251,8 +242,17 @@ public class MyEcosystem_predprey extends CAtoolbox {
 
 			world.step();
 
-			// world.preyAgents.forEach(p -> prey++);
-   //      	world.predatorAgents.forEach(p-> pred++);
+			int nb[]= world.getNumbers(); // nb[0] prey nb[1] predator
+
+			// On écrit dans le fichier
+
+			try {
+                out.write(it + " " + nb[0] + " " + nb[1] + "\n");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+			
 
 			
 			// 3 - iterate
@@ -263,13 +263,9 @@ public class MyEcosystem_predprey extends CAtoolbox {
 
 			// On écrit dans le fichier
 
-			 // try {
-    //             out.write(it+" "+nbPrey+"\n");
-    //         } catch (IOException e) {
-    //             e.printStackTrace();
-    //         }
+			if (it==500) break;
 
-            if (nbPrey==0 || nbPred==0) break;
+            if (nb[0]==0 || nb[1]==0) break;
 			
 			try {
 				Thread.sleep(delai);
@@ -278,10 +274,10 @@ public class MyEcosystem_predprey extends CAtoolbox {
 
 
 		}
-		// try {
-  //           	out.close();
-  //           } catch (IOException e) {
-  //           e.printStackTrace();}
+		try {
+            	out.close();
+            } catch (IOException e) {
+            e.printStackTrace();}
 		
 	}
 
