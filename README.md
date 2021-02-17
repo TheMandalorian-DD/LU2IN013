@@ -2,4 +2,4 @@
 
 *Seulement les classes PredatorAgent, PreyAgent, World et MyEcosystem_predprey ont été modifié*
 
-*Les numéros des questions ont été mis en commentaire*
+*Les numéros des questions ont été mis en commentaire aux codes qui les correspondent*
